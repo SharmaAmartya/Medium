@@ -16,10 +16,11 @@ export const Auth = ({type}: {type: "signup" | "signin"}) => {
     async function sendRequest() {
         try{
             const resp = await axios.post(`${BACKEND_URL}/user/${type == 'signin' ? 'signin' : 'signup'}`, postInput)
-        const jwt = resp.data
+            const jwt = resp.data
+            console.log(resp.data)
 
-        localStorage.setItem('token', jwt)
-        navigate('/blog')
+            localStorage.setItem('token', String(jwt))
+            navigate('/blogs')
         }
         catch(e){
             alert(`Error while signing ${type == 'signin' ? 'in' : 'up'}`)
